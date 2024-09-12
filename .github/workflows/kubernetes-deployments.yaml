@@ -1,0 +1,19 @@
+name: Build All Applications
+on: [push]
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  kubernetes-deployments:
+    # force rebuild
+    # TODO find a way to define a var/const to use for both the @ref on uses and gha_k8s_version input
+    uses: acme/repo-with-github-actions-for-k8s/.github/workflows/all-applications.yaml@main
+    with:
+      application_group: 'foo'
+      # git tag
+      gha_k8s_version: v0.0.1
+      # git tag
+      common_libsonnet_ref: v0.0.1
+    secrets: inherit
